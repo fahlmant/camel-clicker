@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/interface.css" />
+        <link rel="stylesheet" type="text/css" href="css/interface.css" />
         <script type="text/javascript" src="js/main.js" ></script>
-		<title>Camel Clicker v0.0.1</title>
+		<title>Camel Clicker v0.0.2</title>
 	</head>
 	<body>
-		<button type="button" onClick="camelClick(1)" id="camelButton">Click Me!</button> 
-        <p>You have <span id="camels">0</span> camels</p> 
+        <button type="button" onClick="camelClick(1)" id="camelButton">Click Me!</button> 
+        <p>You have <span id="camels">0</span> camels</p>
+        <p>You are generating <span id="camelsPerSecond">0</span> camels per second</p> 
+        <p>You have <span id="camelherds">0</span> camelherds</p>
+        <p>The next camelherd will cost <span id="camelherdCost">0</span> camels</p>
+        <button type="button" onClick="buyCamelherd()" id="buyCamelherdButton">Buy Camelherd</button>
+        <br>
+        <br>
         <button type="button" onClick="saveGame()" id="saveButton">Save</button> 
         <button type="button" onClick="loadGame()" id="loadButton">Load</button> 
 	</body>

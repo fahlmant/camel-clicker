@@ -1,20 +1,64 @@
 var camels = 0;
+var camelherds = 0;
 
 function camelClick(number){
+
     camels = camels + number;
-    console.log("click");
-    document.getElementById("camels").innerHTML = camels;
+    document.getElementById("camels").innerHTML = prettify(camels);
 };
 
 function loadGame() {
-    var savegame = JSON.parse(localStorage.getItem("save"));
-    console.log(savegame);
-    camels = savegame;
-    document.getElementById("camels").innerHTML = camels;
 
+    var savegame = JSON.parse(localStorage.getItem("save"));
+    if (typeof savegame.camels !== "undefined") camels = savegame.camels;
+    if (typeof savegame.camelherds !== "undefined") camelherds = savegame.camelherds;
+    document.getElementById("camels").innerHTML = prettify(camels);
+    document.getElementById("camelherds").innerHTML = prettify(camelherds);
+    document.getElementById("camelherdCost").innerHTML = prettify(nextCamelherdCost(camelherds));
 }
 
 function saveGame() {
-    localStorage.setItem("save", JSON.stringify(camels));
+    
+    var save = {
+        camels: camels,
+        camelherds: camelherds
+    }
+
+    localStorage.setItem("save", JSON.stringify(save));
 }
+
+function buyCamelherd() {
+    
+    var camelherdCost = nextCamelherdCost(camelherds);
+    if(camels >= camelherdCost) {
+        camelherds = camelherds + 1;
+        camels = camels - camelherdCost;
+        document.getElementById("camelherds").innerHTML = prettify(camelherds);
+        document.getElementById("camels").innerHTML = prettify(camels);
+    }
+    var nextCost = nextCamelherdCost(camelherds);
+    document.getElementById("camelherdCost").innerHTML = nextCost;
+}
+
+function nextCamelherdCost(numCamelherds) {
+
+    var nextCost = Math.floor(10*Math.pow(1.1, numCamelherds));
+    return nextCost
+}
+
+function clacNextCost(itemCount, rate) {
+
+    var nextCost = Math.floor(rate*Math.pow(1.1, itemCount));
+}
+
+function prettify(input){
+    var output = Math.round(input * 1000000)/1000000;
+	return output;
+}
+
+window.setInterval(function(){
+    cps = camelherds*.4;
+    camelClick(cps);
+    document.getElementById("camelsPerSecond").innerHTML = prettify(cps);
+}, 1000);
 
