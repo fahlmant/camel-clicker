@@ -1,6 +1,16 @@
 var camels = 0;
 var camelherds = 0;
 
+window.onload = function() {
+    pageLoad();
+  };
+
+function pageLoad(){
+    document.getElementById("camelherdCost").innerHTML = prettify(nextCamelherdCost(camelherds));
+    loadGame();
+
+}
+
 function camelClick(number){
 
     camels = camels + number;
@@ -27,6 +37,18 @@ function saveGame() {
     localStorage.setItem("save", JSON.stringify(save));
 }
 
+function resetGame() {
+
+    //This needs to be updated as to support prestige
+    localStorage.removeItem("save");
+    camels = 0;
+    camelherds = 0;
+    document.getElementById("camels").innerHTML = prettify(camels);
+    document.getElementById("camelherds").innerHTML = prettify(camelherds);
+    document.getElementById("camelherdCost").innerHTML = prettify(nextCamelherdCost(camelherds));
+
+}
+
 function buyCamelherd() {
     
     var camelherdCost = nextCamelherdCost(camelherds);
@@ -41,7 +63,9 @@ function buyCamelherd() {
 }
 
 function nextCamelherdCost(numCamelherds) {
-
+    if (numCamelherds == 0) {
+        return 10;
+    }
     var nextCost = Math.floor(10*Math.pow(1.1, numCamelherds));
     return nextCost
 }
