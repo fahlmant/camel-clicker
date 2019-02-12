@@ -20,11 +20,16 @@ function camelClick(number){
 function loadGame() {
 
     var savegame = JSON.parse(localStorage.getItem("save"));
+    var encrypted = CryptoJS.AES.encrypt(localStorage.getItem("save"), "pass");
+    var decrypted = CryptoJS.AES.decrypt(encrypted, "pass");
+    console.log("Save: ", localStorage.getItem("save"));
     if (typeof savegame.camels !== "undefined") camels = savegame.camels;
     if (typeof savegame.camelherds !== "undefined") camelherds = savegame.camelherds;
     document.getElementById("camels").innerHTML = prettify(camels);
     document.getElementById("camelherds").innerHTML = prettify(camelherds);
     document.getElementById("camelherdCost").innerHTML = prettify(nextCamelherdCost(camelherds));
+    document.getElementById("export").innerHTML = encrypted;
+    console.log("Save2: " , decrypted.toString(CryptoJS.enc.Utf8));
 }
 
 function saveGame() {
@@ -49,6 +54,10 @@ function resetGame() {
 
 }
 
+function importGame() {
+
+    //TODO
+}
 function buyCamelherd() {
     
     var camelherdCost = nextCamelherdCost(camelherds);

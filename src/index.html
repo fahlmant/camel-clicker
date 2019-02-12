@@ -2,6 +2,7 @@
 <html>
 	<head>
         <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
         <script type="text/javascript" src="js/main.js" ></script>
 		<title>Camel Clicker v0.0.2</title>
 	</head>
@@ -11,11 +12,20 @@
         <p>You are generating <span id="camelsPerSecond">0</span> camels per second</p> 
         <p>You have <span id="camelherds">0</span> camelherds</p>
         <p>The next camelherd will cost <span id="camelherdCost">0</span> camels</p>
+        <br>
         <button type="button" onClick="buyCamelherd()" id="buyCamelherdButton">Buy Camelherd</button>
         <br>
         <br>
         <button type="button" onClick="saveGame()" id="saveButton">Save</button> 
         <button type="button" onClick="loadGame()" id="loadButton">Load</button>
-        <button type="button" onClick="resetGame()" id="resetButton">Reset</button> 
+        <button type="button" onClick="resetGame()" id="resetButton">Reset</button>
+        <br>
+        <p>Export Game</p>
+        <textarea id="export" rows="4" cols="50"></textarea>
+        <br>
+        <p>Import Game</p>
+        <textarea id="import" rows="4" cols="50"></textarea><br>
+        <button type="button" onClick="importGame()" id="importButton">Import</button>
+
 	</body>
 </html>
